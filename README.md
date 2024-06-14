@@ -1,9 +1,7 @@
 # Overview
 This app uses RShiny to visualise contour plots from my paper [PAPER NAME]
 
-An online version is hosted [here](https://brainstimulation.github.io/optical-irradiance-contour-webapp/) and can be used directly in a web browser. It may take a few minutes for the app to open due to the size of the data files required.
-
-This repository contains the files and instructions to run the app locally.
+You can either [use this online hosted version](https://brainstimulation.github.io/optical-irradiance-contour-webapp/) (it may take a few minutes for the app to open due to the size of the data files required), or run the app locally (see instructions below).
 
 ![image](https://github.com/qboesley/optical-irradiance-contour-viewer/assets/127060519/8d4ff816-b115-4046-ae3e-b83f5083fe01)
 
@@ -14,14 +12,14 @@ Start by installing R, you can [download it from a mirror here](https://cran.r-p
 
 Next install RStudio, you can download it [here](https://posit.co/downloads/).
 
-## Installing the app
+## Setup
 
-1. Download the file `appSetup.R` from this repository.
-2. In the RStudio console run the command `getwd()` which will print the current working directory to the console.
-3. Move the `appSetup.R` file into this working directory. Alternatively, in RStudio you can press `ctrl + shift + h` or go to `Session > Set Working Directory > Choose Directory ... ` to set a different working directory, then move `appSetup.R` there.
-4. In the RStudio console run the command `source("appSetup.R")`. This will create a folder `OptoContourViewerApp` in the working directory and download the app file and data files necessary to run the app locally.
+1. Download the file `appSetup.R` from this repository ([go to the file](https://github.com/qboesley/optical-irradiance-contour-viewer/blob/main/appSetup.r) and click the download icon).
+1. Open RStudio. If there is a project open, close it by going to `File > Close project`.
+1. Click `ctrl + shift + h` or go to `Session > Set Working Directory > Choose Directory...` and select the location where you've saved the `appSetup.R` file.
+1. In the Console window (bottom-left quadrant in the default layout), run the command `source("appSetup.R")`. This will create a folder called `OptoContourViewerApp` in your working directory and download the necessary files to run the app locally.
 
-## Running the app
+## Run
 
 ### Using the RStudio console
 Enter the command below into the RStudio console.
