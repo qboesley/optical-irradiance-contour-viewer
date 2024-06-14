@@ -1,76 +1,40 @@
 # Overview
 This app uses RShiny to visualise contour plots from my paper [PAPER NAME]
 
-An online version is hosted at [LINK] and can be used directly in a web browser. 
+An online version is hosted [here](https://brainstimulation.github.io/optical-irradiance-contour-webapp/) and can be used directly in a web browser. It may take a few minutes for the app to open due to the size of the data files required.
 
-This repository contains the files and instructions to run the app locally. It requires R to be installed on your system, and the shiny, bslib, and R.matlab packages.
-  
-![image](https://github.com/qboesley/optical-irradiance-contour-viewer/assets/127060519/0f7e125a-0d88-4c43-b6e2-976d54c2fa30)
+This repository contains the files and instructions to run the app locally.
 
+![image](https://github.com/qboesley/optical-irradiance-contour-viewer/assets/127060519/8d4ff816-b115-4046-ae3e-b83f5083fe01)
 
 # Get started
 
 ## Prerequisites
+Start by installing R, you can [download it from a mirror here](https://cran.r-project.org/mirrors.html). Tested on v4.4.0.
 
-- R: you can [download it from a mirror here](https://cran.r-project.org/mirrors.html). Tested on v4.4.0.
+Next install RStudio, you can download it [here](https://posit.co/downloads/).
 
-## Run
+## Installing the app
 
-First, download this repository to your local machine into a folder called `optical-irradiance-contour-viewer/`. You can do this in one step by [cloning this repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository). 
+1. Download the file `appSetup.R` from this repository.
+2. In the RStudio console run the command `getwd()` which will print the current working directory to the console.
+3. Move the `appSetup.R` file into this working directory. Alternatively, in RStudio you can press `ctrl + shift + h` or go to `Session > Set Working Directory > Choose Directory ... ` to set a different working directory, then move `appSetup.R` there.
+4. In the RStudio console run the command `source("appSetup.R")`. This will create a folder `OptoContourViewerApp` in the working directory and download the app file and data files necessary to run the app locally.
 
-If you don't know what that means, you can download the repository manually from the main page as a .zip file and extract it where ever you like. ![image](https://github.com/qboesley/optical-irradiance-contour-viewer/assets/127060519/8d9e048e-2a88-4eef-ba84-6fbb45413547)
+## Running the app
 
+### Using the RStudio console
+Enter the command below into the RStudio console.
+```
+source(file.path("OptoContourViewerApp", "localApp.R"))
+```
 
-Next, run the app using one of the following methods.
-
-### Using command line
-
-1. Open your command line or terminal and navigate to the `optical-irradiance-contour-viewer/` directory.
-1. On Mac and Linux systems run the following command:
-
-    ```sh
-    Rscript run.R
-    ```
-
-1. On Windows systems run the following command (assuming R is installed in the default location, if you have installed R in a different location then set the directory to the location of Rscript.exe). 
-
-    ```sh
-    “C:\Program Files\R\R-4.4.0\bin\Rscript.exe” run.R
-    ```
-  
-1. Once it has finished installing packages and loading the app, go to the URL printed in the terminal using any browser. It will look something like `http://127.0.0.1:XXXX`.
-
-### Using RGui
-
-1. Run R, which willl open the R graphical user interface (GUI).
-1. `File` > `Change dir...` > select the `optical-irradiance-contour-viewer/` directory.
-
-    ![image](https://github.com/qboesley/optical-irradiance-contour-viewer/assets/127060519/20e75cc2-803b-46dd-bc31-67fac6f5a0d9)
-
-1. Run the following command in the console window:
-    
-    ```r
-    source("run.R")
-    ```
-
-The first time you run the command you may get a pop-up window asking "Would you like to use a personal library instead?". Click yes and another pop-up may appear asking "Would you like to create a personal library 'DIRECTORY' to install packages into?". Click yes again and R will continue downloading and installing the necessary packages. 
-
-To quit, press `ctrl+C` or `esc` on the RGui console to stop the app, then type `q()` to quit the console.
-
-### Using RStudio
-
-1. Install [RStudio](https://posit.co/downloads/).
-1. Open RStudio, and select `Settings` > `Set Working Directory` > `Choose Directory`. Select the `optical-irradiance-contour-viewer/` folder and `Open`.
-1. To run the app the first time, run the following command in the console:
-   ```
-   source("run.R")
-   ```
-1. To run the app again, go to the `Files` navigator and click on `app.R`. The app code will open in a panel in RStudio.
-1. Click `Run App` (green arrow in top-right corner of top-left quadrant). A new window will appear with the app running.
+### Using the RStudio GUI
+Navigate to the app in the files panel of RStudio `OptoContourViewerApp > localApp.R`, click on it and it will open in RStudio. Click on the `Run App` button at the top right of the panel the app file opened in.
 
 # Using the App
 ## Input Options
-The sidebar on the left hand side contains all the app controls. 
+The sidebar on the left hand side contains all the app controls. You may need to scroll down to see all of the options
 - **Tissue Type** toggles between the grey matter and white matter simulation datasets.
 - **Wavelength (nm)** toggles between the source wavelengths used in the simulations.
   - Note that 580 nm light is actually yellow rather than green, but it is plotted in green here for better visibility.
@@ -80,16 +44,23 @@ The sidebar on the left hand side contains all the app controls.
 - **Total Optical Power (mW)** sets the total power output from the light source. The user can type values in to the box. You can also use the clicker icons, or scroll the mouse wheel to change the value by 0.1 mW at a time.
 - **Threshold Irradiance (mW/mm^2)** sets the irradiance value to draw the contour line at. The user can type values in to the box. You can also use the clicker icons, or scroll the mouse wheel to change the value by 0.1 mW at a time.
 - **Show Gridlines** turns gridlines on or off on the plot. Lines are plotted in 0.1 mm intervals.
-- **Download Plot** button will save the currently displayed plot as a .png file. The filename is automatically generated.
-  - General format: {SourceInfo}\_{TissueType}_{Wavelength}nm_P{SourcePower}_T{ThresholdValue}_G{GridlineStatus}.png
-  - LED example: `L_0500_W_480nm_P1-00_T1-00_Gon.png` is the 500 µm edge length LED source in white matter at 480 nm with 1 mW source power and a contour line at 1 mW/mm^2 with gridlines.
-  - Optical fibre example: `OF_0200_37_G580nm_P2-30_T1-30_Goff.png` is the 200 µm diameter, NA = 0.37, optical fibre source in grey matter at 580 nm with 2.3 mW source power and a contour line at 1.3 mW/mm^2 with no gridlines.
+- **Show Irradiance Plot Location** shows the location the irradiance profile plot (on the right hand side) is drawn from.
+- **Logarithmic Irradiance Plot** switches the x axis of the irradiance profile plot between linear and logarithmic (base 10) scales.
+- **Irradiance Plot Location** sets the lateral position on the contour plot from which to draw the irradiance profile. You can click and drag on the blue dot on the slider. If you click on the blue dot you can then use the arrow keys on your keyboard to move the slider.
+- **Download Contour Plot** button will save the currently displayed contour plot as a .png file. The filename is automatically generated.
+  - General format: {SourceInfo}\_{TissueType}_{Wavelength}nm_P{SourcePower}_T{ThresholdValue}_G{GridlineStatus}_X{IrradianceProfileLocation}mm_CONTOUR.png
+  - LED example: `L-0500_W_480nm_P1-00_T1-00_Gon_X0-00mm_CONTOUR.png` is the 500 µm edge length LED source in white matter at 480 nm with 1 mW source power and a contour line at 1 mW/mm^2 with gridlines.
+  - Optical fibre example: `OF_0200_37_G580nm_P2-30_T1-30_Goff_X0-13_CONTOUR.png` is the 200 µm diameter, NA = 0.37, optical fibre source in grey matter at 580 nm with 2.3 mW source power and a contour line at 1.3 mW/mm^2 with no gridlines.
   - Decimal points in {SourcePower} are replaced by hyphens (-)
-
+- **Download Irradiance Plot** button will save the currently displayed irradiance plot as a .png file. The filename is automatically generated.
+  - The corresponding irradiance plot names for the examples above are
+  - `L-0500_W_480nm_P1-00_T1-00_Gon_Son_X0-00mm_IRRADIANCE_LIN.png`Irradiance plot with linear scale.
+  - `F-0200-37_G_580nm_P2-30_T1-30_Goff_Soff_X0-13mm_IRRADIANCE_LOG.png`Irradiance plot with log scale.
+ 
 ## Outputs
-Whenever any options are changed the contour plot and summary data are updated automatically.
+Whenever any options are changed the contour plot, irradiance profile plot, and summary data are updated automatically.
 
-If the app window is resized the aspect ratio of the contour plot will change. Updating any of the input options will redraw the plot with a square aspect ratio again.
+If the app window is resized the aspect ratio of the plots will change. Updating any of the input options will redraw the plot with a square aspect ratio again.
 
 The light source dimensions (diamter for optical fibres, edge length for LEDs) are drawn on the plot as a black horizontal line. 
 The following summary data are included below the contour plot:
@@ -108,6 +79,7 @@ These are discussed extensively in the paper. A shortened list is given here:
   - LED (10 µm)
 - Higher optical power values and lower irradiance threshold values may result in contours that do not fit within the 2&nbsp;mm&nbsp;x&nbsp;2&nbsp;mm plot region. When this occurs the max irradiance value is still correct, but the volume illuminated calculation will be incorrect. Values for forward, backward, and lateral spread will not increase beyond 1.00 mm either and so the relevant parameters will be incorrect when contours do not fit within the plot region.
 - As contour lines get closer to the edge of the plot region, they tend to become more ragged. The reported values for light spread in these cases will overestimate the 'true' spread of light. For example, in the figure below backward spread is reported to be 0.59&nbsp;mm but I would offer approximately 0.45&nbsp;mm as a more resonable estimate in this instance.
-![image](https://github.com/qboesley/optical-irradiance-contour-viewer/assets/127060519/4849e3c1-7523-49f0-bc3d-7b57f028eccd)
+![image](https://github.com/qboesley/optical-irradiance-contour-viewer/assets/127060519/39586fec-6e25-4571-98dd-5d00a08c708a)
+
 
 
