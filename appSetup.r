@@ -15,12 +15,13 @@ cat("white.mat\n")
 download.file("https://brainstimulation.github.io/optical-irradiance-contour-webapp/data/white.mat?raw=1", destfile = file.path('OptoContourViewerApp', 'data', 'white.mat'), quiet = TRUE, mode = 'wb')
 
 # install required packages
-# https://stackoverflow.com/questions/4090169/elegant-way-to-check-for-missing-packages-and-install-them
 cat("Installing necessary packages\n")
-requiredpackages <- c("shiny", "bslib", "R.matlab")
-notyetinstalled <- requiredpackages[!(requiredpackages %in% requiredpackages()[,"Package"])]
-if(length(notyetinstalled)) install.packages(notyetinstalled, repos = "http://cran.us.r-project.org")
+packages <- c("shiny", "bslib", "R.matlab")
+installed_packages <- packages %in% rownames(installed.packages())
+if (any(installed_packages == FALSE)) {
+  install.packages(packages[!installed_packages], repos = "http://cran.us.r-project.org")
+}
 
 # exit message
-cat("All app components downloaded! To start the app run the command below in this console:\n\nsource(file.path(\"OptoContourViewerApp\", \"localApp.R\"))")
+cat("\nAll app components downloaded! To start the app run the command below in this console:\n\nsource(file.path(\"OptoContourViewerApp\", \"localApp.R\"))")
 
